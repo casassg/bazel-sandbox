@@ -25,6 +25,11 @@ def nb_binary(name, src, deps=[], visibility=None):
 
 def nb_library(name, srcs, deps=[], visibility=None, imports=[]):
   """Notebook python library
+
+  Args:
+    srcs: Notebooks to generate as python library.
+    deps: Dependencies for library.
+    name: Name for library.
   """
   for src in srcs:
     if not src.endswith('.ipynb'):
