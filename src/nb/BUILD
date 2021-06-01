@@ -14,6 +14,9 @@ nb_binary(
 
 nb_library(
   name="nb_lib",
-  src="nb_lib/constants.ipynb",
+  srcs=glob(["nb_lib/*.ipynb"]),
+  deps=[
+    requirement('requests')
+  ],
   imports=["."],
 )

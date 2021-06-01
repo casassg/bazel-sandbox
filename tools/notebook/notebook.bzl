@@ -23,19 +23,25 @@ def nb_binary(name, src, deps=[], visibility=None):
     
   )
 
-def nb_library(name, src, deps=[], visibility=None, imports=[]):
-  out = src.replace('.ipynb', '.py')
+def nb_library(name, srcs, deps=[], visibility=None, imports=[]):
+  """Notebook python library
+  """
+  for src in srcs:
+    if not src.endswith('.ipynb'):
+      fail('nb_library sources must be ipynb files. Found: %s' % src)
+
+  outs = [o.replace('.ipynb', '.py') for o in srcs]
   native.genrule(
-    name = name + '-convert',
-    srcs = [src],
-    outs = [out],
-    cmd = "$(location //tools/notebook:nb_lib_convert) $< $@",
+    name = name + '-nbconvert',
+    srcs = srcs,
+    outs = outs,
+    cmd = "$(location //tools/notebook:nb_lib_convert) --input_nbs $(SRCS)  --output_pys $(OUTS)",
     tools = ["//tools/notebook:nb_lib_convert"],
     visibility = ["//visibility:private"],
   )
   return py_library(
     name=name,
-    srcs=[out],
+    srcs=outs,
     deps=deps,
     imports=imports,
     visibility=visibility
