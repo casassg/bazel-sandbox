@@ -1,0 +1,5 @@
+# Common loading for all build files
+
+load("@rules_python//python:defs.bzl", "py_binary")
+load("@my_deps//:requirements.bzl", "requirement")
+
