@@ -1,6 +1,6 @@
 # Bazel experiments
 
-This is just a catch all for experiments I want to do with bazel, I don't plan to maintain this actively, just mostly trying thing in a repo publicly 
+This is just a catch all for experiments I want to do with bazel, I don't plan to maintain this actively, just mostly trying things in a repo publicly 
 
 ## Python Notebook targets in bazel
 
