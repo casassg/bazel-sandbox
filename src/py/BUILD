@@ -12,7 +12,8 @@ py_binary(
   name = "main",
   srcs = ["main.py"],
   deps = [
-    "//src/py/gcs:lib",
+    "//src/py:lib",
+    "//src/nb:nb_lib",
     requirement("tensorflow"),
   ]
 )

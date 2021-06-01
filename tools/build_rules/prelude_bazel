@@ -3,5 +3,5 @@
 
 load("@rules_python//python:defs.bzl", "py_binary", "py_library")
 load("@my_deps//:requirements.bzl", "requirement")
-load("//tools/notebook:notebook.bzl", "nb_binary")
+load("//tools/notebook:notebook.bzl", "nb_binary", "nb_library")
 
