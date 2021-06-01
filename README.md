@@ -21,3 +21,10 @@ Inspired largely from [nbdev](https://nbdev.fast.ai/), it transforms a notebook 
 
 Example: `bazel run //src/py:main`
 Source: [tools/notebook](tools/notebook)
+
+
+## Misc
+
+**Updating 3rdparty:**
+- Change requirements.in
+- Run `bazel run //3rdparty/py:requirements.update`

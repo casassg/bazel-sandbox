@@ -1,3 +1,1 @@
-
-
-pip-compile --generate-hashes --allow-unsafe  --output-file=requirements_lock.txt requirements.txt
+bazel run //3rdparty/py:requirements.update

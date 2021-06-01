@@ -1,7 +1,7 @@
-load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
 load("@my_deps//:requirements.bzl", "requirement")
 
-def nb_binary(name, src, deps=[], visibility=None):
+def nb_binary(name, srcs, deps=[], visibility=None, **kwargs):
   """Run notebook natively
 
   Args:
@@ -13,17 +13,17 @@ def nb_binary(name, src, deps=[], visibility=None):
     name=name,
     main='notebook_bin.py',
     srcs=['//tools/notebook:notebook_bin.py'],
-    args = ['$(location '+src +')',],
-    data=[src],
+    args = ['$(location '+ src +')' for src in srcs],
+    data=srcs,
     deps=[
       # Add papermill and ipykernel as deps
       requirement('papermill'),
       requirement('ipykernel'),
     ] + deps,
-    
+    **kwargs
   )
 
-def nb_library(name, srcs, deps=[], visibility=None, imports=[]):
+def nb_library(name, srcs, deps=[], visibility=None, **kwargs):
   """Notebook python library
 
   Args:
@@ -48,10 +48,23 @@ def nb_library(name, srcs, deps=[], visibility=None, imports=[]):
     name=name,
     srcs=outs,
     deps=deps,
-    imports=imports,
-    visibility=visibility
+    visibility=visibility,
+    **kwargs
   )
   
 
 
-  
+def nb_test(name, srcs, deps=[], **kwargs):
+  return py_test(
+    name=name,
+    main='notebook_bin.py',
+    srcs=['//tools/notebook:notebook_bin.py'],
+    args = ['$(location '+ src +')' for src in srcs],
+    data=srcs,
+    deps=[
+      # Add papermill and ipykernel as deps
+      requirement('papermill'),
+      requirement('ipykernel'),
+    ] + deps,
+    **kwargs
+  )
