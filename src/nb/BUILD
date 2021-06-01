@@ -2,9 +2,19 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])
 
-nb_test(
+nb_test_suite(
   name="test",
-  srcs=["test.ipynb"],
+  srcs=glob(["test*.ipynb"]),
+  deps=[
+    requirement('tensorflow'),
+    "//src/py:lib",
+    ":nb_lib"
+  ]
+)
+
+nb_test(
+  name="test_2",
+  srcs=["test_2.ipynb"],
   deps=[
     requirement('tensorflow'),
     "//src/py:lib",
