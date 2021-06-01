@@ -3,21 +3,17 @@ workspace(name = "bazel_sandbox")
 
 
 
-# Load rules_python from git to get compile_pip_requirements target. 
-# ToDo(gcasassaez): Revert this as soon as new release is done.
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-git_repository(
-    name="rules_python",
-    remote="https://github.com/bazelbuild/rules_python",
-    commit="c6970fc44877dbbbce84d17845d9bc797aefe299",
-    shallow_since = "1621986152 +1000",
+
+# ToDo(gcasassaez): Revert this as soon as new release is done for rules_python.
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+rules_python_version = "ed6cc8f2c3692a6a7f013ff8bc185ba77eb9b4d2"  # Latest master commit for the moment so I can use `compile_pip_requirements`
+
+http_archive(
+    name = "rules_python",
+    sha256 = "3cebd7e9e4bbd255e21538ff231680a8633a15c4ce43662899453b150bf315c1",
+    strip_prefix = "rules_python-{version}".format(version = rules_python_version),
+    url = "https://github.com/bazelbuild/rules_python/archive/{version}.tar.gz".format(version = rules_python_version),
 )
-# load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-# http_archive(
-#     name = "rules_python",
-#     url = "https://github.com/bazelbuild/rules_python/releases/download/0.2.0/rules_python-0.2.0.tar.gz",
-#     sha256 = "778197e26c5fbeb07ac2a2c5ae405b30f6cb7ad1f5510ea6fdac03bded96cc6f",
-# )
 
 load("@rules_python//python:pip.bzl", "pip_parse")
 
