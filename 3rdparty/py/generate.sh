@@ -1,3 +1,3 @@
 
 
-pip-compile --generate-hashes  --output-file=requirements_lock.txt requirements.txt
+pip-compile --generate-hashes --allow-unsafe  --output-file=requirements_lock.txt requirements.txt
