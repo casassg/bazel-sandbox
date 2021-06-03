@@ -4,3 +4,5 @@ bazel-bazel-sandbox
 bazel-out
 bazel-testlogs
 __pycache__
+.idea
+.ijwb

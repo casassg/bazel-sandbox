@@ -10,5 +10,6 @@ py_binary(
     srcs=['notebook_lib.py'],
     deps=[
       requirement('nbconvert'),
+      requirement('ipython'),
     ]
   )
