@@ -23,6 +23,16 @@ Example: `bazel run //src/py:main`
 Source: [tools/notebook](tools/notebook)
 
 
+## Multi-stage container builds
+
+### copy_layer
+
+Similar to docker multi-stage, we can extract files from one image to use in another. This target generates a layer that can be used with container_image target
+
+Example: `bazel run src/py:py_image`
+Source: [tools/container](tools/container)
+
+
 ## Misc
 
 **Updating 3rdparty:**
